@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context="MainActivity">
 
     <Spinner
         android:layout_width="match_parent"
@@ -13,7 +13,6 @@
         android:layout_margin="10dp"
         android:textSize="30sp"
         android:id="@+id/sp"/>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +20,6 @@
         android:layout_margin="10dp"
         android:text="Nom : xxxxxx"
         android:textSize="30sp"/>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,7 +27,6 @@
         android:layout_margin="10dp"
         android:text="Matricule : xxxxxx"
         android:textSize="30sp"/>
-
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,7 +47,6 @@
             android:textSize="30sp"
             android:id="@+id/r2"/>
     </RadioGroup>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,7 +54,6 @@
         android:id="@+id/tfonction"
         android:text="Fonction : xxxxxx"
         android:textSize="30sp"/>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,7 +61,6 @@
         android:layout_margin="10dp"
         android:text="Naissance : xxxxxx"
         android:textSize="30sp"/>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

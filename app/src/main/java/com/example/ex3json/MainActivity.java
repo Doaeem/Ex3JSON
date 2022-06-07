@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.RadioGroup;
+import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,13 +41,22 @@ public class MainActivity extends AppCompatActivity {
         tsal=findViewById(R.id.tsal);
         employees=getAllemplys();
 
-        ArrayList<String> nomEmps= new ArrayList<>();
+        ArrayList<HashMap<String, Object>> list_emp = new ArrayList<>();
 
-        for(Employe e:employees){
-            nomEmps.add(e.getNom());
+        for(Employe em : employees){
+            HashMap<String, Object> item = new HashMap<>();
+            item.put("nom",em.getNom());
+            if(em.getGenre().equalsIgnoreCase("homme"))
+                item.put("image",R.drawable.homme);
+            else
+                item.put("image",R.drawable.femme);
+            list_emp.add(item);
         }
 
-        ArrayAdapter ad = new ArrayAdapter(this, android.R.layout.simple_list_item_1,nomEmps);
+        String[] from = {"nom", "image"};
+        int[] to = {R.id.itemnom, R.id.timage};
+
+        SimpleAdapter ad = new SimpleAdapter(this,list_emp,R.layout.activity_item_employe,from,to);
         s.setAdapter(ad);
 
         s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -65,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
                     rg.check(R.id.r2);
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -74,22 +84,24 @@ public class MainActivity extends AppCompatActivity {
     }
     public String loadJsonFromRaw(int resId) {
 
-        try {
+        try
+        {
             InputStream in = getResources().openRawResource(resId);
             byte[] data = new byte[in.available()];
             in.read(data);
             in.close();
             return new String(data);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
         return "";
     }
-
     public ArrayList<Employe> getAllemplys() {
         ArrayList<Employe> emp = new ArrayList<>();
-
-        try {
+        try
+        {
             String json = loadJsonFromRaw(R.raw.employees);
             JSONArray arr = new JSONArray(json);
 
@@ -104,7 +116,9 @@ public class MainActivity extends AppCompatActivity {
                 s.setSalaire(o.getDouble("salaire"));
                 emp.add(s);
             }
-        } catch (JSONException e) {
+        }
+        catch (JSONException e)
+        {
             e.printStackTrace();
         }
         return emp;
